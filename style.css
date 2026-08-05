@@ -1,0 +1,172 @@
+/* Body Setup */
+body {
+    background-color: #0d1117;
+    color: #e6edf3;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Card Container */
+.container {
+    background-color: #161b22;
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Profile Header */
+.profile-header {
+    text-align: center;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #58a6ff;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+
+h1 {
+    color: #58a6ff;
+    font-size: 1.8rem;
+    margin: 12px 0 4px 0;
+}
+
+.subtitle {
+    color: #8b949e;
+    font-size: 0.95rem;
+    margin: 0 0 6px 0;
+}
+
+.location {
+    color: #79c0ff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Section Headings */
+h2 {
+    color: #79c0ff;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 6px;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.bio {
+    color: #c9d1d9;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Skill Badges */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.badge {
+    background-color: #21262d;
+    color: #58a6ff;
+    border: 1px solid #30363d;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+input[type="text"] {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 6px;
+    outline: none;
+    flex: 1;
+}
+
+button {
+    background-color: #238636;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #2ea043;
+}
+/* Social Links Layout */
+.social-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Individual Brand Colors */
+.facebook {
+    background-color: #1877f2;
+}
+
+.instagram {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.github {
+    background-color: #0969da;
+    border: 1px solid #388bfd;
+}
+.github:hover {
+    background-color: #1f6feb;
+}
+
+.gmail {
+    background-color: #58a6ff;
+    border: 1px solid #30363d;
+
+}
+.gmail:hover {
+    background-color: #d93025;
+}
