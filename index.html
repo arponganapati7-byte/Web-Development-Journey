@@ -3,77 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arpon | Personal Portfolio</title>
+    <title>Arpon | Personal Brand Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <nav class="navbar">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#location" class="nav-link">Location</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <button id="theme-toggle" class="theme-btn">☀️ Light</button>
+    </nav>
+
     <div class="container">
-        <header class="profile-header">
-            <img src="c:\Users\WALTON\OneDrive\Pictures\Profile.jpg" alt="Arpon Ganapati" class="profile-img">
-            <h1>Arpon Ganapati</h1>
-            <p class="subtitle">Aspiring Full-Stack & AI Engineer</p>
-            <p class="location">📍Ekuria, Dhaka, Bangladesh</p>
-        </header>
-        <section class="section">
-    <h2>Social Profiles</h2>
-    <div class="social-links">
-        <a href="https://www.facebook.com/arpon.veki09" target="_blank" class="social-btn facebook">
-            Facebook
-        </a>
-        
-        <a href="https://www.instagram.com/arpon_rizz_99" target="_blank" class="social-btn instagram">
-            Instagram
-        </a>
 
-        <a href="https://github.com/arponganapati7-byte" target="_blank" class="social-btn github">
-            GitHub
-        </a>
+       <section id="home" class="hero-card">
+    <img src="c:\Users\WALTON\OneDrive\Pictures\Profile.jpg" alt=" Profile Photo" class="profile-img">
 
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arpon.ganapati7@gmail.com" target="_blank" class="social-btn gmail">
-            Email
-        </a>
-
+    <h1 id="greeting">Hello, I'm Arpon</h1>
+    <p class="tagline">AI Developer & Tech Enthusiast</p>
+    <p class="subtitle">Building clean, interactive, and responsive web experiences from scratch.</p>
+    <div class="cta-buttons">
+        <a href="#projects" class="btn primary-btn">View Projects</a>
+        <a href="#contact" class="btn secondary-btn">Get In Touch</a>
     </div>
 </section>
 
-        <section class="section">
+        <section id="about" class="card">
             <h2>About Me</h2>
-            <p class="bio">
-                Passionate developer focused on building modern web applications and AI tools. 
-                Transitioning from C++ programming into full-stack development with HTML, CSS, JavaScript, and TypeScript.
-            </p>
+            <p>Welcome to my official personal site! I am passionate about web development, physical conditioning, and exploring new hardware tech. I'm currently focused on building modern web applications while expanding my programming skill set.</p>
         </section>
 
-        <section class="section">
-            <h2>Tech Stack & Skills</h2>
-            <div class="skills-grid">
-                <span class="badge">C++ (OOP & Logic)</span>
-                <span class="badge">Git & GitHub</span>
-                <span class="badge">HTML5 & CSS3</span>
-                <span class="badge">JavaScript (In Progress)</span>
-                <span class="badge">Problem Solving</span>
+        <section id="skills" class="card">
+            <h2>Technical Skills</h2>
+            
+            <div class="skill-box">
+                <div class="skill-info">
+                    <span>HTML5 & CSS3</span>
+                    <span>70%</span>
+                </div>
+                <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+            </div>
+
+            <div class="skill-box">
+                <div class="skill-info">
+                    <span>JavaScript (ES6+)</span>
+                    <span>69%</span>
+                </div>
+                <div class="progress-bar"><div class="progress" style="width: 69%;"></div></div>
+            </div>
+
+            <div class="skill-box">
+                <div class="skill-info">
+                    <span>Git & GitHub</span>
+                    <span>82%</span>
+                </div>
+                <div class="progress-bar"><div class="progress" style="width: 82%;"></div></div>
+            </div>
+
+            <div class="skill-box">
+                <div class="skill-info">
+                    <span>C++</span>
+                    <span>74%</span>
+                </div>
+                <div class="progress-bar"><div class="progress" style="width: 74%;"></div></div>
             </div>
         </section>
 
-        <section class="section">
+        <section id="projects" class="card">
+            <h2>Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>🚀 Personal Portfolio</h3>
+                    <p>A multi-theme responsive one-page personal portfolio built with modern HTML5, CSS3, and JavaScript.</p>
+                    <span class="badge">Web Dev</span>
+                </div>
+                <div class="project-card">
+                    <h3>C++ Project</h3>
+                    <p>Built a Logic Gate Calculator and a Tic-Tac-Toe game using Object-Oriented Programming (OOP) principles</p>
+                    <span class="badge">OOP</span>
+                    <span class="badge">Logic Gates</span>
+                    <span class="badge">Interactivity</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="location" class="card">
+            <h2>Location & Roots</h2>
+            <div class="info-box">
+                <h3>🏠 Home District</h3>
+                <p>Bauphal, Barisal, Bangladesh</p>
+            </div>
+            <div class="info-box">
+                <h3>📍 Current Residence</h3>
+                <p>Ekuria, Dhaka, Bangladesh</p>
+            </div>
+        </section>
+
+        <section id="contact" class="card">
             <h2>Connect With Me</h2>
-            <div class="controls">
-                <input type="text" id="nameInput" placeholder="Enter your name">
-                <button onclick="greetUser()">Say Hello!</button>
+            <div class="social-links">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=your-email@gmail.com" target="_blank" class="social-btn gmail">Gmail</a>
+                <a href="https://github.com/arponganapati7-byte" target="_blank" class="social-btn github">GitHub</a>
+                <a href="https://www.facebook.com/arpon.veki09" target="_blank" class="social-btn facebook">Facebook</a>
+                <a href="https://www.instagram.com/arpon_rizz_99" target="_blank" class="social-btn instagram">Instagram</a>
             </div>
         </section>
+
     </div>
 
-    <script>
-        function greetUser() {
-            const name = document.getElementById('nameInput').value;
-            if (name.trim() !== "") {
-                alert("Hello " + name + "! Thanks for visiting my portfolio site.");
-            } else {
-                alert("Please enter your name first!");
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
