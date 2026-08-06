@@ -1,5 +1,5 @@
 /* ==========================================
-   1. GLOBAL RESETS & SMOOTH SCROLLING
+   1. GLOBAL RESETS & BODY
    ========================================== */
 html {
     scroll-behavior: smooth;
@@ -15,70 +15,68 @@ html {
 body {
     background-color: #0d1117;
     color: #c9d1d9;
-    padding-top: 80px;
+    padding-top: 100px; /* Space for floating navbar */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Scroll margin offset to prevent fixed header from covering content */
 .card, .hero-card {
-    scroll-margin-top: 90px;
+    scroll-margin-top: 100px;
 }
 
 /* ==========================================
-   2. STICKY NAVIGATION BAR
+   2. iOS-STYLE FROSTED GLASS NAVBAR
    ========================================== */
 .navbar {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(22, 27, 34, 0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid #30363d;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 620px;
+    
+    /* iOS Glass Effect */
+    background: rgba(255, 255, 255, 0.07); 
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    
+    /* iOS Crisp Dual Borders & Soft Depth Shadow */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 12px 20px;
+    padding: 8px 12px;
     z-index: 1000;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .nav-link {
-    color: #8b949e;
+    color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.88rem;
     font-weight: 500;
-    transition: all 0.2s ease;
+    letter-spacing: -0.2px;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .nav-link:hover {
     color: #ffffff;
-    background-color: #21262d;
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.03);
 }
 
-.theme-btn {
-    padding: 6px 14px;
-    border: 1px solid #30363d;
-    border-radius: 20px;
-    background-color: #21262d;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
-}
-
-.theme-btn:hover {
-    border-color: #58a6ff;
-    transform: scale(1.05);
+.nav-link:active {
+    transform: scale(0.96);
 }
 
 /* ==========================================
-   3. CONTAINER & CARDS
+   3. CONTAINER & GLASSMORPHISM CARDS
    ========================================== */
 .container {
     display: flex;
@@ -91,20 +89,52 @@ body {
 }
 
 .hero-card, .card {
-    background-color: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 12px;
+    background: rgba(22, 27, 34, 0.55);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45),
+                inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    
+    border-radius: 16px;
     padding: 30px;
     width: 100%;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    color: #f0f6fc;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-card {
     text-align: center;
 }
 
-/* Profile Picture Styling */
+.hero-card:hover, .card:hover {
+    border-color: rgba(88, 166, 255, 0.3);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55),
+                0 0 20px rgba(88, 166, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Typography inside cards */
+.card h1, .card h2, .card h3, .hero-card h1 {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.subtitle, .card p, .project-card p, .info-box p {
+    color: #c9d1d9;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.tagline {
+    color: #58a6ff;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+/* Profile Image */
 .profile-img {
     width: 130px;
     height: 130px;
@@ -117,19 +147,38 @@ body {
     transition: border-color 0.3s ease;
 }
 
-.tagline {
-    color: #58a6ff;
-    font-weight: bold;
-    margin: 8px 0;
+/* Inner Project & Location Boxes */
+.info-box, .project-card {
+    background: rgba(13, 17, 23, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 14px;
+    color: #f0f6fc;
+    transition: all 0.25s ease;
 }
 
-.subtitle {
-    color: #8b949e;
-    font-size: 0.95rem;
+.info-box:hover, .project-card:hover {
+    background: rgba(13, 17, 23, 0.7);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.badge {
+    display: inline-block;
+    background-color: #1f6beb;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-top: 8px;
+    margin-right: 4px;
 }
 
 /* ==========================================
-   4. BUTTONS & SKILL BARS
+   4. GLASSMORPHISM BUTTONS & SKILL BARS
    ========================================== */
 .cta-buttons {
     display: flex;
@@ -139,28 +188,46 @@ body {
 }
 
 .btn {
-    padding: 8px 18px;
-    border-radius: 6px;
+    padding: 10px 22px;
+    border-radius: 20px;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    transition: 0.2s ease;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .primary-btn {
-    background-color: #238636;
+    background: rgba(46, 160, 67, 0.45); 
     color: #ffffff;
+    border-color: rgba(46, 160, 67, 0.5);
+}
+
+.primary-btn:hover {
+    background: rgba(46, 160, 67, 0.85);
+    box-shadow: 0 0 20px rgba(46, 160, 67, 0.5);
+    transform: translateY(-2px);
 }
 
 .secondary-btn {
-    background-color: #21262d;
-    color: #c9d1d9;
-    border: 1px solid #30363d;
+    background: rgba(48, 54, 61, 0.45); 
+    color: #f0f6fc;
+    border-color: rgba(139, 148, 158, 0.2);
 }
 
-.primary-btn:hover { background-color: #2ea043; }
-.secondary-btn:hover { background-color: #30363d; }
+.secondary-btn:hover {
+    background: rgba(88, 166, 255, 0.35); 
+    border-color: #58a6ff;
+    box-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
 
+/* Skill Progress Bars */
 .skill-box {
     margin: 15px 0;
 }
@@ -184,26 +251,6 @@ body {
     height: 100%;
     background-color: #58a6ff;
     border-radius: 10px;
-}
-
-/* Project Cards & Badges */
-.info-box, .project-card {
-    background-color: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 12px;
-}
-
-.badge {
-    display: inline-block;
-    background-color: #1f6beb;
-    color: #fff;
-    font-size: 0.75rem;
-    padding: 3px 8px;
-    border-radius: 12px;
-    margin-top: 8px;
-    margin-right: 4px;
 }
 
 /* ==========================================
@@ -245,12 +292,10 @@ body {
     background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
 }
 
-/* Hover Lift Effect */
 .social-btn:hover {
     transform: translateY(-3px);
 }
 
-/* Glowing Hover States */
 .gmail:hover {
     box-shadow: 0 0 20px rgba(234, 67, 53, 0.65);
     background: linear-gradient(135deg, #d93025 0%, #ea8600 100%);
@@ -270,44 +315,4 @@ body {
 .instagram:hover {
     box-shadow: 0 0 20px rgba(228, 64, 95, 0.65);
     background: linear-gradient(45deg, #fccc63, #f77737, #f13f63, #d62976, #962fbf);
-}
-
-/* ==========================================
-   6. LIGHT MODE THEME OVERRIDES
-   ========================================== */
-body.light-mode {
-    background-color: #f6f8fa;
-    color: #24292f;
-}
-
-body.light-mode .navbar {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-bottom-color: #d0d7de;
-}
-
-body.light-mode .hero-card, 
-body.light-mode .card {
-    background-color: #ffffff;
-    border-color: #d0d7de;
-    color: #24292f;
-}
-
-body.light-mode .info-box, 
-body.light-mode .project-card,
-body.light-mode .progress-bar {
-    background-color: #f6f8fa;
-    border-color: #d0d7de;
-}
-
-body.light-mode .nav-link {
-    color: #57606a;
-}
-body.light-mode .nav-link:hover {
-    color: #0969da;
-    background-color: #f3f4f6;
-}
-
-body.light-mode .profile-img {
-    border-color: #0969da;
-    box-shadow: 0 4px 14px rgba(9, 105, 218, 0.15);
 }
