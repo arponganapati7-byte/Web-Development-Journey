@@ -22,70 +22,83 @@ document.addEventListener("DOMContentLoaded", () => {
 
         greetingElement.textContent = `${greetingText} ${emoji}, I'm Arpon`;
     }
-    
+
     // ==========================================
-    // 2. ACCURATE ACTIVE NAV LINK HIGHLIGHT
+
+    // ==========================================
+    // 2. ACCURATE ACTIVE NAV HIGHLIGHT
     // ==========================================
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll(".nav-link");
 
-    // Create an observer that triggers when a section is visible
-    const observerOptions = {
+    let isClickScrolling = false;
+
+    // 1. Observer configured to target top portion of viewport
+    const navObserverOptions = {
         root: null,
-        rootMargin: "-20% 0px -50% 0px", // Triggers when section enters viewport mid-screen
+        rootMargin: "-10% 0px -70% 0px", // Focuses on top 20% of viewport
         threshold: 0
     };
 
-    const observer = new IntersectionObserver((entries) => {
+    const navObserver = new IntersectionObserver((entries) => {
+        if (isClickScrolling) return; // Prevent observer overwrite during smooth scroll taps
+
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 const currentId = entry.target.getAttribute("id");
-                
                 navLinks.forEach((link) => {
-                    link.classList.remove("active");
-                    if (link.getAttribute("href") === `#${currentId}`) {
-                        link.classList.add("active");
-                    }
+                    link.classList.toggle("active", link.getAttribute("href") === `#${currentId}`);
                 });
             }
         });
-    }, observerOptions);
+    }, navObserverOptions);
 
-    // Observe each card/section
-    sections.forEach((section) => observer.observe(section));
+    sections.forEach((section) => navObserver.observe(section));
 
-    // Special check: Force "Contact" active if user reaches bottom of page
-    window.addEventListener("scroll", () => {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20) {
-            navLinks.forEach((link) => link.classList.remove("active"));
-            const contactLink = document.querySelector('a[href="#contact"]');
-            if (contactLink) contactLink.classList.add("active");
-        }
+    // 2. Click Handler: Instantly highlight clicked link
+    navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+            navLinks.forEach((l) => l.classList.remove("active"));
+            link.classList.add("active");
+            
+            // Lock observer briefly while page smooth scrolls to target
+            isClickScrolling = true;
+            setTimeout(() => {
+                isClickScrolling = false;
+            }, 800);
+        });
     });
 
     // ==========================================
-    // 3. ANIMATE SKILL BARS ON SCROLL
+    // 3. ANIMATE SKILL BARS
     // ==========================================
     const skillSection = document.getElementById("skills");
     const progressBars = document.querySelectorAll(".progress");
-    let animated = false;
 
     if (skillSection) {
-        window.addEventListener("scroll", () => {
-            const sectionPos = skillSection.getBoundingClientRect().top;
-            const screenPos = window.innerHeight / 1.2;
+        const skillObserverOptions = {
+            root: null,
+            threshold: 0.3
+        };
 
-            if (sectionPos < screenPos && !animated) {
-                progressBars.forEach((bar) => {
-                    const targetWidth = bar.style.width;
-                    bar.style.width = "0%"; // Start at 0
-                    setTimeout(() => {
-                        bar.style.transition = "width 1.2s ease-in-out";
-                        bar.style.width = targetWidth; // Animate to target percentage
-                    }, 100);
-                });
-                animated = true; // Prevents re-animating repeatedly
-            }
-        });
+        const skillObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    progressBars.forEach((bar) => {
+                        const targetWidth = bar.dataset.width;
+                        bar.style.width = "0%";
+                        
+                        setTimeout(() => {
+                            bar.style.transition = "width 1.2s cubic-bezier(0.4, 0, 0.2, 1)";
+                            bar.style.width = `${targetWidth}%`;
+                        }, 100);
+                    });
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, skillObserverOptions);
+
+        skillObserver.observe(skillSection);
     }
 });

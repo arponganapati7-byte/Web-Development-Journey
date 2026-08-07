@@ -1,4 +1,18 @@
 /* ==========================================
+   0. CSS VARIABLES (DRY SETUP)
+   ========================================== */
+:root {
+    --bg-dark: #0d1117;
+    --card-bg: rgba(22, 27, 34, 0.55);
+    --text-primary: #ffffff;
+    --text-secondary: #c9d1d9;
+    --accent-color: #58a6ff;
+    --accent-glow: rgba(88, 166, 255, 0.25);
+    --accent-border: rgba(88, 166, 255, 0.4);
+    --border-subtle: rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================
    1. GLOBAL RESETS & BODY
    ========================================== */
 html {
@@ -13,13 +27,12 @@ html {
 }
 
 body {
-    background-color: #0d1117;
-    color: #c9d1d9;
-    padding-top: 100px; /* Space for floating navbar */
+    background-color: var(--bg-dark);
+    color: var(--text-secondary);
+    padding-top: 100px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Scroll margin offset to prevent fixed header from covering content */
 .card, .hero-card {
     scroll-margin-top: 100px;
 }
@@ -35,12 +48,10 @@ body {
     width: 90%;
     max-width: 620px;
     
-    /* iOS Glass Effect */
     background: rgba(255, 255, 255, 0.07); 
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     
-    /* iOS Crisp Dual Borders & Soft Depth Shadow */
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
                 inset 0 1px 1px rgba(255, 255, 255, 0.2);
@@ -65,16 +76,8 @@ body {
     transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* Active link highlighting */
-.nav-link.active {
-    color: #ffffff;
-    background: rgba(88, 166, 255, 0.25);
-    border: 1px solid rgba(88, 166, 255, 0.4);
-    box-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
-}
-
 .nav-link:hover {
-    color: #ffffff;
+    color: var(--text-primary);
     background: rgba(255, 255, 255, 0.15);
     transform: scale(1.03);
 }
@@ -83,8 +86,15 @@ body {
     transform: scale(0.96);
 }
 
+.nav-link.active {
+    color: var(--text-primary);
+    background: var(--accent-glow);
+    border: 1px solid var(--accent-border);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
 /* ==========================================
-   3. CONTAINER & GLASSMORPHISM CARDS
+   3. CONTAINER & CARDS
    ========================================== */
 .container {
     display: flex;
@@ -97,11 +107,11 @@ body {
 }
 
 .hero-card, .card {
-    background: rgba(22, 27, 34, 0.55);
+    background: var(--card-bg);
     backdrop-filter: blur(16px) saturate(160%);
     -webkit-backdrop-filter: blur(16px) saturate(160%);
     
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--border-subtle);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45),
                 inset 0 1px 1px rgba(255, 255, 255, 0.15);
     
@@ -124,38 +134,35 @@ body {
     transform: translateY(-2px);
 }
 
-/* Typography inside cards */
 .card h1, .card h2, .card h3, .hero-card h1 {
-    color: #ffffff;
+    color: var(--text-primary);
     font-weight: 700;
 }
 
 .subtitle, .card p, .project-card p, .info-box p {
-    color: #c9d1d9;
+    color: var(--text-secondary);
     font-weight: 500;
     line-height: 1.5;
 }
 
 .tagline {
-    color: #58a6ff;
+    color: var(--accent-color);
     font-weight: bold;
     margin: 8px 0;
 }
 
-/* Profile Image */
 .profile-img {
     width: 130px;
     height: 130px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #58a6ff;
+    border: 3px solid var(--accent-color);
     margin: 0 auto 15px auto;
     display: block;
     box-shadow: 0 4px 14px rgba(88, 166, 255, 0.25);
     transition: border-color 0.3s ease;
 }
 
-/* Inner Project & Location Boxes */
 .info-box, .project-card {
     background: rgba(13, 17, 23, 0.5);
     backdrop-filter: blur(10px);
@@ -186,7 +193,7 @@ body {
 }
 
 /* ==========================================
-   4. GLASSMORPHISM BUTTONS & SKILL BARS
+   4. BUTTONS & SKILL BARS
    ========================================== */
 .cta-buttons {
     display: flex;
@@ -211,7 +218,7 @@ body {
 
 .primary-btn {
     background: rgba(46, 160, 67, 0.45); 
-    color: #ffffff;
+    color: var(--text-primary);
     border-color: rgba(46, 160, 67, 0.5);
 }
 
@@ -229,13 +236,12 @@ body {
 
 .secondary-btn:hover {
     background: rgba(88, 166, 255, 0.35); 
-    border-color: #58a6ff;
+    border-color: var(--accent-color);
     box-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
-    color: #ffffff;
+    color: var(--text-primary);
     transform: translateY(-2px);
 }
 
-/* Skill Progress Bars */
 .skill-box {
     margin: 15px 0;
 }
@@ -257,12 +263,13 @@ body {
 
 .progress {
     height: 100%;
-    background-color: #58a6ff;
+    background-color: var(--accent-color);
     border-radius: 10px;
+    width: 0%;
 }
 
 /* ==========================================
-   5. SOCIAL LINKS & GLOWING GRADIENTS
+   5. SOCIAL LINKS
    ========================================== */
 .social-links {
     display: flex;
@@ -275,7 +282,7 @@ body {
     display: block;
     padding: 12px;
     border-radius: 8px;
-    color: #ffffff;
+    color: var(--text-primary);
     text-decoration: none;
     font-weight: bold;
     text-align: center;
@@ -283,81 +290,46 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.gmail { 
-    background: linear-gradient(135deg, #ea4335 0%, #fbbc05 100%);
-}
+.gmail { background: linear-gradient(135deg, #ea4335 0%, #fbbc05 100%); }
+.github { background-color: #24292e; border-color: #30363d; }
+.facebook { background-color: #1877f2; }
+.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 
-.github { 
-    background-color: #24292e; 
-    border-color: #30363d;
-}
+.social-btn:hover { transform: translateY(-3px); }
+.gmail:hover { box-shadow: 0 0 20px rgba(234, 67, 53, 0.65); }
+.github:hover { box-shadow: 0 0 20px rgba(88, 166, 255, 0.5); border-color: var(--accent-color); }
+.facebook:hover { box-shadow: 0 0 20px rgba(24, 119, 242, 0.6); }
+.instagram:hover { box-shadow: 0 0 20px rgba(228, 64, 95, 0.65); }
 
-.facebook { 
-    background-color: #1877f2; 
-}
-
-.instagram { 
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-}
-
-.social-btn:hover {
-    transform: translateY(-3px);
-}
-
-.gmail:hover {
-    box-shadow: 0 0 20px rgba(234, 67, 53, 0.65);
-    background: linear-gradient(135deg, #d93025 0%, #ea8600 100%);
-}
-
-.github:hover {
-    box-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
-    background: linear-gradient(135deg, #2f363d 0%, #58a6ff 100%);
-    border-color: #58a6ff;
-}
-
-.facebook:hover {
-    box-shadow: 0 0 20px rgba(24, 119, 242, 0.6);
-    background: linear-gradient(135deg, #1877f2 0%, #00c6ff 100%);
-}
-
-.instagram:hover {
-    box-shadow: 0 0 20px rgba(228, 64, 95, 0.65);
-    background: linear-gradient(45deg, #fccc63, #f77737, #f13f63, #d62976, #962fbf);
-}
 /* ==========================================
    6. MOBILE RESPONSIVE MEDIA QUERY
    ========================================== */
 @media screen and (max-width: 768px) {
-  /* Floating Pills Navbar Positioning & Wrap */
-  nav, .navbar {
-    position: fixed !important;
-    top: 16px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    .navbar {
+        top: 16px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 6px 10px !important;
 
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 6px 10px !important;
+        width: 92% !important;
+        max-width: 500px !important;
+        padding: 10px 14px !important;
+        border-radius: 30px !important;
+        box-sizing: border-box !important;
+    }
 
-    width: 92% !important;
-    max-width: 500px !important;
-    padding: 10px 14px !important;
-    border-radius: 30px !important;
-    box-sizing: border-box !important;
-    z-index: 1000 !important;
-  }
+    .nav-link, nav a, .navbar a {
+        white-space: nowrap !important;
+        padding: 5px 10px !important;
+        font-size: 0.85rem !important;
+    }
 
-  /* Prevent link overflow & ensure smooth text scaling */
-  .nav-link, nav a, .navbar a {
-    white-space: nowrap !important;
-    padding: 5px 10px !important;
-    font-size: 0.85rem !important;
-  }
-
-  /* Add extra space at the top so the main hero card isn't blocked by wrapping nav */
-  body {
-    padding-top: 120px !important;
-  }
+    body {
+        padding-top: 120px !important;
+    }
 }
