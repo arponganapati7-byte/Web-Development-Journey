@@ -22,29 +22,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
         greetingElement.textContent = `${greetingText} ${emoji}, I'm Arpon`;
     }
-
+    
     // ==========================================
-    // 2. ACTIVE NAV LINK HIGHLIGHT ON SCROLL
+    // 2. ACCURATE ACTIVE NAV LINK HIGHLIGHT
     // ==========================================
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll(".nav-link");
 
+    // Create an observer that triggers when a section is visible
+    const observerOptions = {
+        root: null,
+        rootMargin: "-20% 0px -50% 0px", // Triggers when section enters viewport mid-screen
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const currentId = entry.target.getAttribute("id");
+                
+                navLinks.forEach((link) => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href") === `#${currentId}`) {
+                        link.classList.add("active");
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    // Observe each card/section
+    sections.forEach((section) => observer.observe(section));
+
+    // Special check: Force "Contact" active if user reaches bottom of page
     window.addEventListener("scroll", () => {
-        let currentSection = "";
-
-        sections.forEach((section) => {
-            const sectionTop = section.offsetTop - 150; // Offset for fixed nav
-            if (window.scrollY >= sectionTop) {
-                currentSection = section.getAttribute("id");
-            }
-        });
-
-        navLinks.forEach((link) => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${currentSection}`) {
-                link.classList.add("active");
-            }
-        });
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20) {
+            navLinks.forEach((link) => link.classList.remove("active"));
+            const contactLink = document.querySelector('a[href="#contact"]');
+            if (contactLink) contactLink.classList.add("active");
+        }
     });
 
     // ==========================================
