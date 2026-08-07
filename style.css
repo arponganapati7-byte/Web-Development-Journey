@@ -316,3 +316,40 @@ body {
     box-shadow: 0 0 20px rgba(228, 64, 95, 0.65);
     background: linear-gradient(45deg, #fccc63, #f77737, #f13f63, #d62976, #962fbf);
 }
+/* ==========================================
+   6. MOBILE RESPONSIVE MEDIA QUERY
+   ========================================== */
+@media screen and (max-width: 768px) {
+  /* Floating Pills Navbar Positioning & Wrap */
+  nav, .navbar {
+    position: fixed !important;
+    top: 16px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 6px 10px !important;
+
+    width: 92% !important;
+    max-width: 500px !important;
+    padding: 10px 14px !important;
+    border-radius: 30px !important;
+    box-sizing: border-box !important;
+    z-index: 1000 !important;
+  }
+
+  /* Prevent link overflow & ensure smooth text scaling */
+  .nav-link, nav a, .navbar a {
+    white-space: nowrap !important;
+    padding: 5px 10px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Add extra space at the top so the main hero card isn't blocked by wrapping nav */
+  body {
+    padding-top: 120px !important;
+  }
+}
