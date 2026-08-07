@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
-
+ 
         
     // ==========================================
     // 3. ANIMATE SKILL BARS
