@@ -22,9 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         greetingElement.textContent = `${greetingText} ${emoji}, I'm Arpon`;
     }
-
-    // ==========================================
-
     // ==========================================
     // 2. ACCURATE ACTIVE NAV HIGHLIGHT
     // ==========================================
@@ -33,35 +30,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let isClickScrolling = false;
 
-    // 1. Observer configured to target top portion of viewport
     const navObserverOptions = {
         root: null,
-        rootMargin: "-10% 0px -70% 0px", // Focuses on top 20% of viewport
+        rootMargin: "-10% 0px -65% 0px", 
         threshold: 0
     };
 
     const navObserver = new IntersectionObserver((entries) => {
-        if (isClickScrolling) return; // Prevent observer overwrite during smooth scroll taps
+        if (isClickScrolling) return;
 
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 const currentId = entry.target.getAttribute("id");
-                navLinks.forEach((link) => {
-                    link.classList.toggle("active", link.getAttribute("href") === `#${currentId}`);
-                });
+                
+                // Check if user is scrolled to the very bottom
+                const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 40);
+                
+                if (!isAtBottom) {
+                    navLinks.forEach((link) => {
+                        link.classList.toggle("active", link.getAttribute("href") === `#${currentId}`);
+                    });
+                }
             }
         });
     }, navObserverOptions);
 
     sections.forEach((section) => navObserver.observe(section));
 
-    // 2. Click Handler: Instantly highlight clicked link
+    // Click handler
     navLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
+        link.addEventListener("click", () => {
             navLinks.forEach((l) => l.classList.remove("active"));
             link.classList.add("active");
             
-            // Lock observer briefly while page smooth scrolls to target
             isClickScrolling = true;
             setTimeout(() => {
                 isClickScrolling = false;
@@ -69,6 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Scroll Listener: Force "Contact" active when at bottom of page
+    window.addEventListener("scroll", () => {
+        if (isClickScrolling) return;
+
+        const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 40);
+        if (isAtBottom) {
+            navLinks.forEach((link) => {
+                link.classList.toggle("active", link.getAttribute("href") === "#contact");
+            });
+        }
+    });
+
+        
     // ==========================================
     // 3. ANIMATE SKILL BARS
     // ==========================================

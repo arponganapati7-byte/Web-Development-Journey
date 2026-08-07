@@ -332,4 +332,8 @@ body {
     body {
         padding-top: 120px !important;
     }
+    /* Ensure bottom card has space to trigger active state */
+    .container {
+        padding-bottom: 120px;
+    }
 }
