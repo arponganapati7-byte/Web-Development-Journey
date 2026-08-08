@@ -72,23 +72,74 @@
         </section>
 
         <section id="projects" class="card">
-            <h2>Featured Projects</h2>
+            <h2>Featured Interactive Demos</h2>
+            
             <div class="project-grid">
                 <div class="project-card">
-                    <h3>🚀 Personal Portfolio</h3>
-                    <p>A multi-theme responsive one-page personal portfolio built with modern HTML5, CSS3, and JavaScript.</p>
-                    <span class="badge">Web Dev</span>
-                </div>
-                <div class="project-card">
-                    <h3>C++ Project</h3>
-                    <p>Built a Logic Gate Calculator and a Tic-Tac-Toe game using Object-Oriented Programming (OOP) principles.</p>
-                    <span class="badge">OOP</span>
-                    <span class="badge">Logic Gate</span>
-                    <span class="badge">Interactivity</span>
-                </div>
-            </div>
-        </section>
+                    <h3>⚡ Logic Gate Simulator (Interactive Demo)</h3>
+                    <p>Select inputs and a logic gate (AND, OR, XOR, NAND, NOR) to test logical outputs in real time.</p>
+                    
+                    <div class="demo-box">
+                        <div class="demo-controls">
+                            <button id="inputA" class="toggle-btn">Input A: 0</button>
+                            <select id="gateSelect" class="gate-dropdown">
+                                <option value="AND">AND</option>
+                                <option value="OR">OR</option>
+                                <option value="XOR">XOR</option>
+                                <option value="NAND">NAND</option>
+                                <option value="NOR">NOR</option>
+                            </select>
+                            <button id="inputB" class="toggle-btn">Input B: 0</button>
+                        </div>
+                        <div class="demo-result">
+                            Output: <span id="gateOutput" class="output-value">0</span>
+                        </div>
+                    </div>
 
+                    <div class="badges">
+                        <span class="badge">Logic Gate</span>
+                        <span class="badge">JavaScript</span>
+                        <span class="badge">Interactive</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+        <h3>❌⭕ Tic-Tac-Toe (Player vs Smart AI)</h3>
+        <p>Play against a smart AI opponent or challenge a friend right on the page!</p>
+        
+        <div class="demo-box">
+            <div class="mode-selection" style="text-align: center; margin-bottom: 12px;">
+                <label for="tttMode" style="font-size: 0.85rem; font-weight: 600; margin-right: 8px;">Mode:</label>
+                <select id="tttMode" class="gate-dropdown">
+                    <option value="ai">VS Smart AI (Unbeatable)</option>
+                    <option value="pvp">VS Friend (2 Players)</option>
+                </select>
+            </div>
+
+            <div id="tttBoard" class="ttt-grid">
+                <button class="ttt-cell" data-index="0"></button>
+                <button class="ttt-cell" data-index="1"></button>
+                <button class="ttt-cell" data-index="2"></button>
+                <button class="ttt-cell" data-index="3"></button>
+                <button class="ttt-cell" data-index="4"></button>
+                <button class="ttt-cell" data-index="5"></button>
+                <button class="ttt-cell" data-index="6"></button>
+                <button class="ttt-cell" data-index="7"></button>
+                <button class="ttt-cell" data-index="8"></button>
+            </div>
+
+            <div class="ttt-status">
+                <span id="tttTurn">Turn: You (X)</span>
+                <button id="tttReset" class="btn secondary-btn reset-btn">Reset Game</button>
+            </div>
+        </div>
+
+        <div class="badges">
+            <span class="badge">Minimax Algorithm</span>
+            <span class="badge">Smart AI</span>
+            <span class="badge">DOM Manipulation</span>
+        </div>
+    </div>
         <section id="location" class="card">
             <h2>Location & Roots</h2>
             <div class="info-box">

@@ -304,7 +304,7 @@ body {
 /* ==========================================
    6. MOBILE RESPONSIVE MEDIA QUERY
    ========================================== */
-@media screen and (max-width: 768px) {
+    @media screen and (max-width: 768px) {
     .navbar {
         top: 16px !important;
         left: 50% !important;
@@ -335,5 +335,97 @@ body {
     /* Ensure bottom card has space to trigger active state */
     .container {
         padding-bottom: 120px;
+    }
+
+    /* ==========================================
+    7. INTERACTIVE DEMO STYLES
+    ========================================== */
+    .demo-box {
+        background: rgba(13, 17, 23, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 16px;
+        margin: 15px 0;
+    }
+
+    .demo-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .toggle-btn, .gate-dropdown {
+        background: #21262d;
+        color: var(--text-primary);
+        border: 1px solid var(--border-subtle);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .toggle-btn:hover, .gate-dropdown:hover {
+        border-color: var(--accent-color);
+        background: rgba(88, 166, 255, 0.15);
+    }
+
+    .demo-result {
+        text-align: center;
+        margin-top: 12px;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .output-value {
+        color: var(--accent-color);
+        font-size: 1.3rem;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: rgba(88, 166, 255, 0.2);
+    }
+
+    /* Tic-Tac-Toe Styling */
+    .ttt-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 50px);
+        grid-gap: 6px;
+        justify-content: center;
+        margin-bottom: 12px;
+    }
+
+    .ttt-cell {
+        width: 50px;
+        height: 50px;
+        background: #21262d;
+        border: 1px solid var(--border-subtle);
+        border-radius: 8px;
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: var(--accent-color);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.2s ease;
+    }
+
+    .ttt-cell:hover {
+        background: rgba(88, 166, 255, 0.2);
+    }
+
+    .ttt-status {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .reset-btn {
+        padding: 4px 12px !important;
+        font-size: 0.8rem !important;
     }
 }
