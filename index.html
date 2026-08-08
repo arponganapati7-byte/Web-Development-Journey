@@ -22,7 +22,7 @@
         <section id="home" class="hero-card">
             <img src="profile.jpg" alt="Profile Photo" class="profile-img">
             <h1 id="greeting">Hello, I'm Arpon</h1>
-            <p class="tagline">Aspriring Software Developer & Tech Enthusiast</p>
+            <p class="tagline">Aspiring Software Developer & Tech Enthusiast</p>
             <p class="subtitle">Building clean, interactive, and responsive web experiences from scratch.</p>
             <div class="cta-buttons">
                 <a href="#projects" class="btn primary-btn">View Projects</a>
@@ -77,69 +77,85 @@
             <div class="project-grid">
                 <div class="project-card">
                     <h3>⚡ Logic Gate Simulator (Interactive Demo)</h3>
-                    <p>Select inputs and a logic gate (AND, OR, XOR, NAND, NOR) to test logical outputs in real time.</p>
+                    <p>Toggle binary inputs (0 / 1) and select logic gates to observe signal transformation in real time.</p>
                     
                     <div class="demo-box">
-                        <div class="demo-controls">
-                            <button id="inputA" class="toggle-btn">Input A: 0</button>
-                            <select id="gateSelect" class="gate-dropdown">
-                                <option value="AND">AND</option>
-                                <option value="OR">OR</option>
-                                <option value="XOR">XOR</option>
-                                <option value="NAND">NAND</option>
-                                <option value="NOR">NOR</option>
-                            </select>
-                            <button id="inputB" class="toggle-btn">Input B: 0</button>
+                        <div class="gate-simulator">
+                            <div class="gate-inputs">
+                                <button id="inputA" class="bit-btn">Input A: <span class="bit-val">0</span></button>
+                                <button id="inputB" class="bit-btn">Input B: <span class="bit-val">0</span></button>
+                            </div>
+
+                            <div class="gate-selector">
+                                <select id="gateSelect" class="gate-dropdown">
+                                    <option value="AND">AND Gate</option>
+                                    <option value="OR">OR Gate</option>
+                                    <option value="XOR">XOR Gate</option>
+                                    <option value="NAND">NAND Gate</option>
+                                    <option value="NOR">NOR Gate</option>
+                                    <option value="NOT">NOT Gate (Uses Input A)</option>
+                                </select>
+                            </div>
+
+                            <div class="gate-output">
+                                <span>Output:</span>
+                                <span id="gateOutput" class="output-badge off">0</span>
+                            </div>
                         </div>
-                        <div class="demo-result">
-                            Output: <span id="gateOutput" class="output-value">0</span>
+                        
+                        <div class="truth-table-info">
+                            <span id="gateFormula">Formula: 0 AND 0 = 0</span>
                         </div>
                     </div>
 
                     <div class="badges">
-                        <span class="badge">Logic Gate</span>
-                        <span class="badge">JavaScript</span>
-                        <span class="badge">Interactive</span>
+                        <span class="badge">Boolean Logic</span>
+                        <span class="badge">Digital Circuits</span>
+                        <span class="badge">DOM Manipulation</span>
                     </div>
                 </div>
 
                 <div class="project-card">
-        <h3>❌⭕ Tic-Tac-Toe (Player vs Smart AI)</h3>
-        <p>Play against a smart AI opponent or challenge a friend right on the page!</p>
-        
-        <div class="demo-box">
-            <div class="mode-selection" style="text-align: center; margin-bottom: 12px;">
-                <label for="tttMode" style="font-size: 0.85rem; font-weight: 600; margin-right: 8px;">Mode:</label>
-                <select id="tttMode" class="gate-dropdown">
-                    <option value="ai">VS Smart AI (Unbeatable)</option>
-                    <option value="pvp">VS Friend (2 Players)</option>
-                </select>
-            </div>
+                    <h3>❌⭕ Tic-Tac-Toe (Playable AI)</h3>
+                    <p>Challenge our custom AI or play against a friend right on the page!</p>
+                    
+                    <div class="demo-box">
+                        <div style="text-align: center; margin-bottom: 14px;">
+                            <select id="tttMode" class="gate-dropdown ttt-select">
+                                <option value="unbeatable">🤖 AI: Unbeatable (Minimax)</option>
+                                <option value="defensive">🛡️ AI: Defensive Mode</option>
+                                <option value="easy">⚡ AI: Casual / Easy</option>
+                                <option value="pvp">👥 VS Friend (2 Players)</option>
+                            </select>
+                        </div>
 
-            <div id="tttBoard" class="ttt-grid">
-                <button class="ttt-cell" data-index="0"></button>
-                <button class="ttt-cell" data-index="1"></button>
-                <button class="ttt-cell" data-index="2"></button>
-                <button class="ttt-cell" data-index="3"></button>
-                <button class="ttt-cell" data-index="4"></button>
-                <button class="ttt-cell" data-index="5"></button>
-                <button class="ttt-cell" data-index="6"></button>
-                <button class="ttt-cell" data-index="7"></button>
-                <button class="ttt-cell" data-index="8"></button>
-            </div>
+                        <div id="tttBoard" class="ttt-grid">
+                            <button class="ttt-cell" data-index="0"></button>
+                            <button class="ttt-cell" data-index="1"></button>
+                            <button class="ttt-cell" data-index="2"></button>
+                            <button class="ttt-cell" data-index="3"></button>
+                            <button class="ttt-cell" data-index="4"></button>
+                            <button class="ttt-cell" data-index="5"></button>
+                            <button class="ttt-cell" data-index="6"></button>
+                            <button class="ttt-cell" data-index="7"></button>
+                            <button class="ttt-cell" data-index="8"></button>
+                        </div>
 
-            <div class="ttt-status">
-                <span id="tttTurn">Turn: You (X)</span>
-                <button id="tttReset" class="btn secondary-btn reset-btn">Reset Game</button>
-            </div>
-        </div>
+                        <div class="ttt-status">
+                            <span id="tttTurn">Turn: You (X)</span>
+                            <button id="tttReset" class="btn secondary-btn reset-btn">Reset Game</button>
+                        </div>
+                    </div>
 
-        <div class="badges">
-            <span class="badge">Minimax Algorithm</span>
-            <span class="badge">Smart AI</span>
-            <span class="badge">DOM Manipulation</span>
-        </div>
-    </div>
+                    <div class="badges">
+                        <span class="badge">Minimax Algorithm</span>
+                        <span class="badge">Game AI</span>
+                        <span class="badge">DOM Logic</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="location" class="card">
             <h2>Location & Roots</h2>
             <div class="info-box">
