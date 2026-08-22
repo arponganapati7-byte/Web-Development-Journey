@@ -78,6 +78,17 @@
             transition: all 0.2s;
         }
 
+        /* Sorting Visualizer Bar Styles */
+        .array-bar {
+            flex: 1;
+            background-color: #6366f1;
+            border-radius: 4px 4px 0 0;
+            transition: height 0.05s ease, background-color 0.05s ease;
+        }
+        .array-bar.comparing { background-color: #f59e0b !important; }
+        .array-bar.swapping { background-color: #ef4444 !important; }
+        .array-bar.sorted { background-color: #10b981 !important; }
+
         option {
             background-color: #0f172a !important;
             color: #f8fafc !important;
@@ -205,8 +216,10 @@
                 <p class="text-slate-500">Functional tools built with raw JavaScript logic.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Grid for Projects -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 
+                <!-- Logic Gate Simulator -->
                 <div class="glass-panel rounded-[3rem] p-8 md:p-10 flex flex-col h-full border-t border-white/10 project-card-reveal">
                     <div class="flex items-center gap-4 mb-6">
                         <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 flex items-center justify-center">
@@ -265,6 +278,7 @@
                     </div>
                 </div>
 
+                <!-- Tic-Tac-Toe AI -->
                 <div class="glass-panel rounded-[3rem] p-8 md:p-10 flex flex-col h-full border-t border-white/10 project-card-reveal">
                     <div class="flex items-center justify-between mb-6">
                         <div class="flex items-center gap-4">
@@ -301,6 +315,60 @@
                 </div>
 
             </div>
+
+            <!-- Sorting Visualizer Card -->
+            <div class="glass-panel rounded-[3rem] p-8 md:p-10 border-t border-white/10 project-card-reveal">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/20 flex items-center justify-center">
+                            <i data-lucide="bar-chart-2" class="text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Sorting Visualizer</h3>
+                            <span class="text-xs font-mono text-slate-500 uppercase">Algorithm Execution Engine</span>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button id="generateBtn" class="px-4 py-2 rounded-xl text-xs font-mono font-semibold text-brand-secondary bg-brand-secondary/10 border border-brand-secondary/30 hover:bg-brand-secondary/20 transition-all">
+                            New Array
+                        </button>
+                
+                        <select id="algorithmSelect" class="px-3 py-2 rounded-xl text-xs font-mono font-semibold bg-slate-900/80 border border-white/10 text-white outline-none focus:border-brand-primary">
+                            <option value="bubble">Bubble Sort</option>
+                            <option value="selection">Selection Sort</option>
+                            <option value="insertion">Insertion Sort</option>
+                        </select>
+
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+                            <label for="speedSlider">Speed:</label>
+                            <input type="range" id="speedSlider" min="10" max="500" value="100" class="accent-brand-primary w-20">
+                        </div>
+
+                        <button id="sortBtn" class="px-4 py-2 rounded-xl text-xs font-mono font-semibold text-emerald-400 bg-emerald-500/20 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all">
+                            Start
+                        </button>
+                        <button id="stopBtn" class="px-4 py-2 rounded-xl text-xs font-mono font-semibold text-rose-400 bg-rose-500/20 border border-rose-500/40 hover:bg-rose-500/30 transition-all disabled:opacity-30 disabled:cursor-not-allowed" disabled>
+                            Stop
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Visualizer Display Window -->
+                <div class="bg-black/40 rounded-3xl p-6 border border-white/5 mb-6">
+                    <div class="w-full flex items-end justify-center gap-1.5 h-[260px] pb-1" id="arrayContainer">
+                        <!-- Dynamic Array Bars Rendered via JS -->
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-full bg-white/5 text-[10px] font-mono border border-white/10">Data Structures</span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 text-[10px] font-mono border border-white/10">Async Animation</span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 text-[10px] font-mono border border-white/10">Time Complexity</span>
+                </div>
+            </div>
+
         </section>
 
         <section id="location" class="glass-panel rounded-[2.5rem] p-10 mb-40 flex flex-col md:flex-row items-center gap-10 project-card-reveal">
@@ -334,42 +402,42 @@
         </section>
 
         <!-- Contact Section -->
-<section id="contact" class="mb-20 text-center">
-    <h2 class="text-4xl font-black mb-12">Connect With Me</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto px-4">
-        
-        <!-- Gmail -->
-        <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJqbzwGgJTCdPxBVqlhpKnWcHqnGsFkncBMjfDwMDtvlkPZGDbBPwZghlCWMFMtZLKMkHxV" class="flex flex-col items-center justify-center p-6 rounded-2xl glass-panel border border-white/10 hover:border-red-500/50 hover:bg-white/5 transition-all group">
-            <i data-lucide="mail" class="w-8 h-8 text-red-400 mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-white font-medium">Gmail</span>
-        </a>
+        <section id="contact" class="mb-20 text-center">
+            <h2 class="text-4xl font-black mb-12">Connect With Me</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto px-4">
+                
+                <!-- Gmail -->
+                <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJqbzwGgJTCdPxBVqlhpKnWcHqnGsFkncBMjfDwMDtvlkPZGDbBPwZghlCWMFMtZLKMkHxV" class="flex flex-col items-center justify-center p-6 rounded-2xl glass-panel border border-white/10 hover:border-red-500/50 hover:bg-white/5 transition-all group">
+                    <i data-lucide="mail" class="w-8 h-8 text-red-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-white font-medium">Gmail</span>
+                </a>
 
-        <!-- GitHub Inline SVG -->
-        <a href="https://github.com/arponganapati7-byte" target="_blank" class="flex flex-col items-center justify-center p-6 rounded-2xl glass-panel border border-white/10 hover:border-purple-500/50 hover:bg-white/5 transition-all group">
-            <svg class="w-8 h-8 mb-3 fill-slate-200 group-hover:fill-purple-400 group-hover:scale-110 transition-all" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
-            <span class="text-white font-medium">GitHub</span>
-        </a>
+                <!-- GitHub -->
+                <a href="https://github.com/arponganapati7-byte" target="_blank" class="flex flex-col items-center justify-center p-6 rounded-2xl glass-panel border border-white/10 hover:border-purple-500/50 hover:bg-white/5 transition-all group">
+                    <svg class="w-8 h-8 mb-3 fill-slate-200 group-hover:fill-purple-400 group-hover:scale-110 transition-all" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span class="text-white font-medium">GitHub</span>
+                </a>
 
-        <!-- Facebook Inline SVG -->
-        <a href="https://www.facebook.com/arpon.veki09" target="_blank" class="flex flex-col items-center justify-center p-6 rounded-2xl glass-panel border border-white/10 hover:border-blue-500/50 hover:bg-white/5 transition-all group">
-            <svg class="w-8 h-8 mb-3 fill-blue-500 group-hover:scale-110 transition-all" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
-            <span class="text-white font-medium">Facebook</span>
-        </a>
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/arpon.veki09" target="_blank" class="flex flex-col items-center justify-center p-6 rounded-2xl glass-panel border border-white/10 hover:border-blue-500/50 hover:bg-white/5 transition-all group">
+                    <svg class="w-8 h-8 mb-3 fill-blue-500 group-hover:scale-110 transition-all" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    <span class="text-white font-medium">Facebook</span>
+                </a>
 
-        <!-- Instagram Inline SVG -->
-        <a href="https://www.instagram.com/arpon_rizz_99" target="_blank" class="flex flex-col items-center justify-center p-6 rounded-2xl glass-panel border border-white/10 hover:border-pink-500/50 hover:bg-white/5 transition-all group">
-            <svg class="w-8 h-8 mb-3 fill-pink-500 group-hover:scale-110 transition-all" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-            <span class="text-white font-medium">Instagram</span>
-        </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/arpon_rizz_99" target="_blank" class="flex flex-col items-center justify-center p-6 rounded-2xl glass-panel border border-white/10 hover:border-pink-500/50 hover:bg-white/5 transition-all group">
+                    <svg class="w-8 h-8 mb-3 fill-pink-500 group-hover:scale-110 transition-all" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    <span class="text-white font-medium">Instagram</span>
+                </a>
 
-    </div>
-</section>
+            </div>
+        </section>
 
     </main>
 
@@ -377,11 +445,13 @@
         © 2026 Arpon | Personal Brand • Build v4.0.3
     </footer>
 
+    <!-- JavaScript Execution Engine -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             lucide.createIcons();
             gsap.registerPlugin(ScrollTrigger);
 
+            /* Dynamic Greeting Logic */
             const greetingElement = document.getElementById("greeting");
             if (greetingElement) {
                 const hour = new Date().getHours();
@@ -392,6 +462,7 @@
                 greetingElement.textContent = text;
             }
 
+            /* Animations with GSAP */
             const tl = gsap.timeline();
             tl.from("#hero-img", { scale: 0.5, opacity: 0, duration: 1, ease: "back.out(1.7)" })
               .from("#hero-title", { y: 40, opacity: 0, duration: 0.8, ease: "power4.out" }, "-=0.5")
@@ -417,10 +488,13 @@
                 });
             });
 
+            /* Initialize Interactive Demos */
             calculateGate();
             createBoard();
+            initSortingVisualizer();
         });
 
+        /* ================= LOGIC GATE SIMULATOR ================= */
         let stateA = 0;
         let stateB = 0;
 
@@ -496,6 +570,7 @@
             }
         }
 
+        /* ================= TIC-TAC-TOE AI ================= */
         let board = ["", "", "", "", "", "", "", "", ""];
         let gameActive = true;
         let currentPlayer = "X";
@@ -647,6 +722,198 @@
             document.getElementById('tttTurn').innerText = "Your Turn (X)";
             document.getElementById('tttTurn').className = "text-sm font-bold text-brand-secondary";
             createBoard();
+        }
+
+        /* ================= SORTING VISUALIZER ================= */
+        function initSortingVisualizer() {
+            const arrayContainer = document.getElementById("arrayContainer");
+            const generateBtn = document.getElementById("generateBtn");
+            const sortBtn = document.getElementById("sortBtn");
+            const stopBtn = document.getElementById("stopBtn");
+            const algorithmSelect = document.getElementById("algorithmSelect");
+            const speedSlider = document.getElementById("speedSlider");
+
+            if (!arrayContainer) return;
+
+            let array = [];
+            let isSorting = false;
+            const ARRAY_SIZE = 35;
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            function getDelay() {
+                return 510 - speedSlider.value;
+            }
+
+            function generateNewArray() {
+                if (isSorting) return;
+                array = [];
+                arrayContainer.innerHTML = "";
+
+                for (let i = 0; i < ARRAY_SIZE; i++) {
+                    const value = Math.floor(Math.random() * 210) + 20;
+                    array.push(value);
+
+                    const bar = document.createElement("div");
+                    bar.classList.add("array-bar");
+                    bar.style.height = `${value}px`;
+                    arrayContainer.appendChild(bar);
+                }
+            }
+
+            function resetBarStyles() {
+                const bars = document.querySelectorAll(".array-bar");
+                bars.forEach(bar => bar.className = "array-bar");
+            }
+
+            async function bubbleSort() {
+                const bars = document.querySelectorAll(".array-bar");
+                for (let i = 0; i < array.length - 1; i++) {
+                    for (let j = 0; j < array.length - i - 1; j++) {
+                        if (!isSorting) return;
+                        bars[j].classList.add("comparing");
+                        bars[j + 1].classList.add("comparing");
+                        await sleep(getDelay());
+
+                        if (array[j] > array[j + 1]) {
+                            if (!isSorting) return;
+                            bars[j].classList.remove("comparing");
+                            bars[j + 1].classList.remove("comparing");
+                            bars[j].classList.add("swapping");
+                            bars[j + 1].classList.add("swapping");
+
+                            let temp = array[j];
+                            array[j] = array[j + 1];
+                            array[j + 1] = temp;
+
+                            bars[j].style.height = `${array[j]}px`;
+                            bars[j + 1].style.height = `${array[j + 1]}px`;
+                            await sleep(getDelay());
+                        }
+                        bars[j].classList.remove("comparing", "swapping");
+                        bars[j + 1].classList.remove("comparing", "swapping");
+                    }
+                    if (isSorting) bars[array.length - 1 - i].classList.add("sorted");
+                }
+                if (isSorting) bars[0].classList.add("sorted");
+            }
+
+            async function selectionSort() {
+                const bars = document.querySelectorAll(".array-bar");
+                for (let i = 0; i < array.length; i++) {
+                    let minIndex = i;
+                    bars[minIndex].classList.add("comparing");
+
+                    for (let j = i + 1; j < array.length; j++) {
+                        if (!isSorting) return;
+                        bars[j].classList.add("comparing");
+                        await sleep(getDelay());
+
+                        if (array[j] < array[minIndex]) {
+                            bars[minIndex].classList.remove("comparing");
+                            minIndex = j;
+                            bars[minIndex].classList.add("comparing");
+                        } else {
+                            bars[j].classList.remove("comparing");
+                        }
+                    }
+
+                    if (minIndex !== i) {
+                        if (!isSorting) return;
+                        bars[i].classList.add("swapping");
+                        bars[minIndex].classList.add("swapping");
+                        await sleep(getDelay());
+
+                        let temp = array[i];
+                        array[i] = array[minIndex];
+                        array[minIndex] = temp;
+
+                        bars[i].style.height = `${array[i]}px`;
+                        bars[minIndex].style.height = `${array[minIndex]}px`;
+                        bars[minIndex].classList.remove("swapping", "comparing");
+                    }
+                    bars[i].classList.remove("comparing", "swapping");
+                    if (isSorting) bars[i].classList.add("sorted");
+                }
+            }
+
+            async function insertionSort() {
+                const bars = document.querySelectorAll(".array-bar");
+                bars[0].classList.add("sorted");
+
+                for (let i = 1; i < array.length; i++) {
+                    if (!isSorting) return;
+                    let key = array[i];
+                    let j = i - 1;
+
+                    bars[i].classList.add("swapping");
+                    await sleep(getDelay());
+
+                    while (j >= 0 && array[j] > key) {
+                        if (!isSorting) return;
+                        bars[j].classList.add("comparing");
+                        await sleep(getDelay());
+
+                        array[j + 1] = array[j];
+                        bars[j + 1].style.height = `${array[j]}px`;
+                        bars[j].classList.remove("comparing");
+                        j--;
+                    }
+
+                    array[j + 1] = key;
+                    bars[j + 1].style.height = `${key}px`;
+                    bars[i].classList.remove("swapping");
+
+                    if (isSorting) {
+                        for (let k = 0; k <= i; k++) {
+                            bars[k].classList.add("sorted");
+                        }
+                    }
+                }
+            }
+
+            async function startSorting() {
+                if (isSorting) return;
+                const firstBar = document.querySelector(".array-bar");
+                if (firstBar && firstBar.classList.contains("sorted")) {
+                    generateNewArray();
+                }
+
+                isSorting = true;
+                generateBtn.disabled = true;
+                sortBtn.disabled = true;
+                algorithmSelect.disabled = true;
+                stopBtn.disabled = false;
+
+                const algorithm = algorithmSelect.value;
+                if (algorithm === "bubble") await bubbleSort();
+                else if (algorithm === "selection") await selectionSort();
+                else if (algorithm === "insertion") await insertionSort();
+
+                finishSorting();
+            }
+
+            function stopSorting() {
+                isSorting = false;
+                resetBarStyles();
+                finishSorting();
+            }
+
+            function finishSorting() {
+                isSorting = false;
+                generateBtn.disabled = false;
+                sortBtn.disabled = false;
+                algorithmSelect.disabled = false;
+                stopBtn.disabled = true;
+            }
+
+            generateBtn.addEventListener("click", generateNewArray);
+            sortBtn.addEventListener("click", startSorting);
+            stopBtn.addEventListener("click", stopSorting);
+
+            generateNewArray();
         }
     </script>
 </body>
