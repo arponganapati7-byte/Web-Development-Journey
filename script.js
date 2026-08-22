@@ -2,6 +2,73 @@ document.addEventListener("DOMContentLoaded", () => {
     lucide.createIcons();
     gsap.registerPlugin(ScrollTrigger);
 
+    // Lock page scrolling while loading
+    document.body.classList.add("loading");
+
+    const preloader = document.getElementById("preloader");
+    const loaderCount = document.getElementById("loaderCount");
+    const loaderName = document.getElementById("loaderName");
+
+    // ============================================================
+    // PRELOADER & COUNTER LOGIC
+    // ============================================================
+    if (preloader && loaderCount) {
+        let count = 0;
+        loaderCount.textContent = "0";
+
+        // Initial Ripple Effect
+        setTimeout(() => {
+            loaderCount.classList.add("ripple-effect");
+            setTimeout(() => {
+                loaderCount.classList.remove("ripple-effect");
+            }, 700);
+        }, 150);
+
+        // Fade in Name Subtitle
+        if (loaderName) {
+            setTimeout(() => {
+                loaderName.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+                loaderName.style.opacity = "1";
+                loaderName.style.transform = "translateY(0)";
+            }, 500);
+        }
+
+        // Countdown Controller
+        function runCountdown() {
+            count++;
+            loaderCount.textContent = count;
+
+            if (count < 98) {
+                setTimeout(runCountdown, 25); // Fast (0 to 97)
+            } else if (count === 98) {
+                loaderCount.classList.add("ripple-effect");
+                setTimeout(() => {
+                    loaderCount.classList.remove("ripple-effect");
+                }, 600);
+                setTimeout(runCountdown, 500); // Slow pause at 98
+            } else if (count === 99) {
+                setTimeout(runCountdown, 900); // Dramatic pause at 99
+            } else if (count === 100) {
+                setTimeout(() => {
+                    preloader.classList.add("preloader-hidden");
+                    document.body.classList.remove("loading");
+                    
+                    setTimeout(() => {
+                        preloader.style.display = "none";
+                    }, 700);
+
+                    // Trigger GSAP entrance animations after preloader exits
+                    initHeroAnimations();
+                }, 900);
+            }
+        }
+
+        setTimeout(runCountdown, 800);
+    } else {
+        document.body.classList.remove("loading");
+        initHeroAnimations();
+    }
+
     /* Dynamic Greeting Logic */
     const greetingElement = document.getElementById("greeting");
     if (greetingElement) {
@@ -13,31 +80,33 @@ document.addEventListener("DOMContentLoaded", () => {
         greetingElement.textContent = text;
     }
 
-    /* Animations with GSAP */
-    const tl = gsap.timeline();
-    tl.from("#hero-img", { scale: 0.5, opacity: 0, duration: 1, ease: "back.out(1.7)" })
-      .from("#hero-title", { y: 40, opacity: 0, duration: 0.8, ease: "power4.out" }, "-=0.5")
-      .from("#hero-subtitle", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6")
-      .from("#hero-cta", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6");
+    /* ================= GSAP HERO & SCROLL ANIMATIONS ================= */
+    function initHeroAnimations() {
+        const tl = gsap.timeline();
+        tl.from("#hero-img", { scale: 0.5, opacity: 0, duration: 1, ease: "back.out(1.7)" })
+          .from("#hero-title", { y: 40, opacity: 0, duration: 0.8, ease: "power4.out" }, "-=0.5")
+          .from("#hero-subtitle", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6")
+          .from("#hero-cta", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6");
 
-    gsap.from(".bento-reveal", {
-        scrollTrigger: { trigger: "#about", start: "top 80%" },
-        y: 40, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out"
-    });
-
-    gsap.from(".project-card-reveal", {
-        scrollTrigger: { trigger: "#projects", start: "top 80%" },
-        y: 60, opacity: 0, duration: 1, stagger: 0.2, ease: "power4.out"
-    });
-
-    gsap.utils.toArray(".skill-progress").forEach(bar => {
-        gsap.to(bar, {
-            scrollTrigger: { trigger: bar, start: "top 90%" },
-            width: bar.getAttribute("data-width"),
-            duration: 1.5,
-            ease: "power2.out"
+        gsap.from(".bento-reveal", {
+            scrollTrigger: { trigger: "#about", start: "top 80%" },
+            y: 40, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out"
         });
-    });
+
+        gsap.from(".project-card-reveal", {
+            scrollTrigger: { trigger: "#projects", start: "top 80%" },
+            y: 60, opacity: 0, duration: 1, stagger: 0.2, ease: "power4.out"
+        });
+
+        gsap.utils.toArray(".skill-progress").forEach(bar => {
+            gsap.to(bar, {
+                scrollTrigger: { trigger: bar, start: "top 90%" },
+                width: bar.getAttribute("data-width"),
+                duration: 1.5,
+                ease: "power2.out"
+            });
+        });
+    }
 
     /* Initialize Interactive Demos */
     calculateGate();
@@ -275,7 +344,7 @@ function resetGame() {
     createBoard();
 }
 
-/* ================= SORTING VISUALIZER (MOBILE OPTIMIZED) ================= */
+/* ================= SORTING VISUALIZER ================= */
 function initSortingVisualizer() {
     const arrayContainer = document.getElementById("arrayContainer");
     const generateBtn = document.getElementById("generateBtn");
@@ -289,7 +358,6 @@ function initSortingVisualizer() {
     let array = [];
     let isSorting = false;
     
-    // Automatically reduce bar count on mobile for butter-smooth FPS
     const getArraySize = () => window.innerWidth < 640 ? 20 : 35;
 
     function sleep(ms) {
@@ -472,7 +540,6 @@ function initSortingVisualizer() {
     sortBtn.addEventListener("click", startSorting);
     stopBtn.addEventListener("click", stopSorting);
     
-    // Dynamic resize handler
     window.addEventListener("resize", () => {
         if (!isSorting) generateNewArray();
     });
