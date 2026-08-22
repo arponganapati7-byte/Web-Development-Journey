@@ -1,483 +1,81 @@
-/* ==========================================
-   0. CSS VARIABLES SETUP
-   ========================================== */
-:root {
-    --bg-dark: #0d1117;
-    --card-bg: rgba(22, 27, 34, 0.55);
-    --text-primary: #ffffff;
-    --text-secondary: #c9d1d9;
-    --accent-color: #58a6ff;
-    --accent-glow: rgba(88, 166, 255, 0.25);
-    --accent-border: rgba(88, 166, 255, 0.4);
-    --border-subtle: rgba(255, 255, 255, 0.12);
-}
-
-/* ==========================================
-   1. GLOBAL RESETS & BODY
-   ========================================== */
-html {
-    scroll-behavior: smooth;
-}
-
-* { 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: var(--bg-dark);
-    color: var(--text-secondary);
-    padding-top: 100px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.card, .hero-card {
-    scroll-margin-top: 100px;
-}
-
-/* ==========================================
-   2. iOS-STYLE FROSTED GLASS NAVBAR
-   ========================================== */
-.navbar {
-    position: fixed;
-    top: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 620px;
-    
-    background: rgba(255, 255, 255, 0.07); 
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
-                inset 0 1px 1px rgba(255, 255, 255, 0.2);
-    border-radius: 40px;
-    
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 8px 12px;
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
-
-.nav-link {
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.88rem;
-    font-weight: 500;
-    letter-spacing: -0.2px;
-    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.nav-link:hover {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.15);
-    transform: scale(1.03);
-}
-
-.nav-link:active {
-    transform: scale(0.96);
-}
-
-.nav-link.active {
-    color: var(--text-primary);
-    background: var(--accent-glow);
-    border: 1px solid var(--accent-border);
-    box-shadow: 0 0 12px var(--accent-glow);
-}
-
-/* ==========================================
-   3. CONTAINER & CARDS
-   ========================================== */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    padding: 20px;
-    padding-bottom: 120px;
-    max-width: 650px;
-    margin: 0 auto;
-}
-
-.hero-card, .card {
-    background: var(--card-bg);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    
-    border: 1px solid var(--border-subtle);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45),
-                inset 0 1px 1px rgba(255, 255, 255, 0.15);
-    
-    border-radius: 16px;
-    padding: 30px;
-    width: 100%;
-    color: #f0f6fc;
-    font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hero-card {
-    text-align: center;
-}
-
-.hero-card:hover, .card:hover {
-    border-color: rgba(88, 166, 255, 0.3);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55),
-                0 0 20px rgba(88, 166, 255, 0.15);
-    transform: translateY(-2px);
-}
-
-.card h1, .card h2, .card h3, .hero-card h1 {
-    color: var(--text-primary);
-    font-weight: 700;
-}
-
-.subtitle, .card p, .project-card p, .info-box p {
-    color: var(--text-secondary);
-    font-weight: 500;
-    line-height: 1.5;
-}
-
-.tagline {
-    color: var(--accent-color);
-    font-weight: bold;
-    margin: 8px 0;
-}
-
-.profile-img {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--accent-color);
-    margin: 0 auto 15px auto;
-    display: block;
-    box-shadow: 0 4px 14px rgba(88, 166, 255, 0.25);
-    transition: border-color 0.3s ease;
-}
-
-.info-box, .project-card {
-    background: rgba(13, 17, 23, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    
+.glass-panel {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 14px;
-    color: #f0f6fc;
-    transition: all 0.25s ease;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
-.info-box:hover, .project-card:hover {
-    background: rgba(13, 17, 23, 0.7);
-    border-color: rgba(255, 255, 255, 0.18);
-}
-
-.badge {
-    display: inline-block;
-    background-color: #1f6beb;
-    color: #fff;
-    font-size: 0.75rem;
-    padding: 3px 8px;
-    border-radius: 12px;
-    margin-top: 8px;
-    margin-right: 4px;
-}
-
-/* ==========================================
-   4. BUTTONS & SKILL BARS
-   ========================================== */
-.cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.btn {
-    padding: 10px 22px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+.glass-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.primary-btn {
-    background: rgba(46, 160, 67, 0.45); 
-    color: var(--text-primary);
-    border-color: rgba(46, 160, 67, 0.5);
-}
-
-.primary-btn:hover {
-    background: rgba(46, 160, 67, 0.85);
-    box-shadow: 0 0 20px rgba(46, 160, 67, 0.5);
+.glass-card:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(255, 255, 255, 0.06);
     transform: translateY(-2px);
 }
 
-.secondary-btn {
-    background: rgba(48, 54, 61, 0.45); 
-    color: #f0f6fc;
-    border-color: rgba(139, 148, 158, 0.2);
-}
-
-.secondary-btn:hover {
-    background: rgba(88, 166, 255, 0.35); 
-    border-color: var(--accent-color);
-    box-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
-    color: var(--text-primary);
-    transform: translateY(-2px);
-}
-
-.skill-box {
-    margin: 15px 0;
-}
-
-.skill-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
-    font-size: 0.9rem;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background-color: #21262d;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progress {
-    height: 100%;
-    background-color: var(--accent-color);
-    border-radius: 10px;
-    width: 0%;
-}
-
-/* ==========================================
-   5. INTERACTIVE DEMO STYLES
-   ========================================== */
-.demo-box {
-    background: rgba(13, 17, 23, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-    padding: 16px;
-    margin: 15px 0;
-}
-
-.gate-dropdown {
-    background: #21262d;
-    color: var(--text-primary);
-    border: 1px solid var(--border-subtle);
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.gate-dropdown:hover {
-    border-color: var(--accent-color);
-    background: rgba(88, 166, 255, 0.15);
-}
-
-.gate-dropdown option {
-    background-color: #161b22;
-    color: #ffffff;
-    padding: 8px;
-}
-
-.ttt-select {
-    width: 100%;
-    max-width: 280px;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.gate-simulator {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    gap: 12px;
-    margin: 15px 0;
-}
-
-.gate-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.bit-btn {
-    background: #21262d;
-    color: var(--text-primary);
-    border: 1px solid var(--border-subtle);
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.bit-btn.active {
-    background: rgba(46, 160, 67, 0.25);
-    border-color: #2ea643;
-    color: #3fb950;
-    box-shadow: 0 0 10px rgba(46, 160, 67, 0.4);
-}
-
-.output-badge {
-    display: inline-block;
-    padding: 6px 14px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 8px;
-    margin-left: 8px;
-    transition: all 0.3s ease;
-}
-
-.output-badge.off {
-    background: rgba(255, 255, 255, 0.08);
-    color: #8b949e;
-    border: 1px solid var(--border-subtle);
-}
-
-.output-badge.on {
-    background: rgba(88, 166, 255, 0.3);
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    box-shadow: 0 0 15px rgba(88, 166, 255, 0.5);
-}
-
-.truth-table-info {
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    background: rgba(0, 0, 0, 0.2);
-    padding: 6px 12px;
-    border-radius: 6px;
-    margin-top: 10px;
-}
-
-.ttt-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 50px);
-    grid-gap: 6px;
-    justify-content: center;
-    margin-bottom: 12px;
+.blob {
+    position: fixed;
+    filter: blur(90px);
+    z-index: -1;
+    opacity: 0.3;
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 .ttt-cell {
-    width: 50px;
-    height: 50px;
-    background: #21262d;
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: var(--accent-color);
-    cursor: pointer;
+    height: 90px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    transition: background 0.2s ease;
+    font-size: 2rem;
+    font-weight: 800;
+    transition: all 0.2s;
 }
 
-.ttt-cell:hover {
-    background: rgba(88, 166, 255, 0.2);
+/* Sorting Visualizer Bar Styles (Mobile Optimized) */
+.array-bar {
+    flex: 1;
+    background-color: #6366f1;
+    border-radius: 4px 4px 0 0;
+    will-change: height, background-color;
+    transition: background-color 0.05s ease;
 }
 
-.ttt-status {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9rem;
-    font-weight: bold;
+.array-bar.comparing { 
+    background-color: #f59e0b !important; 
 }
 
-.reset-btn {
-    padding: 4px 12px !important;
-    font-size: 0.8rem !important;
+.array-bar.swapping { 
+    background-color: #ef4444 !important; 
 }
 
-/* ==========================================
-   6. SOCIAL LINKS
-   ========================================== */
-.social-links {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 15px;
+.array-bar.sorted { 
+    background-color: #10b981 !important; 
 }
 
-.social-btn {
-    display: block;
-    padding: 12px;
-    border-radius: 8px;
-    color: var(--text-primary);
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    border: 1px solid transparent;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+option {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
 }
 
-.gmail { background: linear-gradient(135deg, #ea4335 0%, #fbbc05 100%); }
-.github { background-color: #24292e; border-color: #30363d; }
-.facebook { background-color: #1877f2; }
-.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+::-webkit-scrollbar { 
+    width: 8px; 
+}
 
-.social-btn:hover { transform: translateY(-3px); }
-.gmail:hover { box-shadow: 0 0 20px rgba(234, 67, 53, 0.65); }
-.github:hover { box-shadow: 0 0 20px rgba(88, 166, 255, 0.5); border-color: var(--accent-color); }
-.facebook:hover { box-shadow: 0 0 20px rgba(24, 119, 242, 0.6); }
-.instagram:hover { box-shadow: 0 0 20px rgba(228, 64, 95, 0.65); }
+::-webkit-scrollbar-track { 
+    background: #020617; 
+}
 
-/* ==========================================
-   7. MOBILE RESPONSIVE MEDIA QUERY
-   ========================================== */
-@media screen and (max-width: 768px) {
-    .navbar {
-        top: 16px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        
-        display: flex !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 6px 10px !important;
+::-webkit-scrollbar-thumb { 
+    background: #1e293b; 
+    border-radius: 10px; 
+}
 
-        width: 92% !important;
-        max-width: 500px !important;
-        padding: 10px 14px !important;
-        border-radius: 30px !important;
-        box-sizing: border-box !important;
-    }
-
-    .nav-link, nav a, .navbar a {
-        white-space: nowrap !important;
-        padding: 5px 10px !important;
-        font-size: 0.85rem !important;
-    }
-
-    body {
-        padding-top: 120px !important;
-    }
+::-webkit-scrollbar-thumb:hover { 
+    background: #6366f1; 
 }
