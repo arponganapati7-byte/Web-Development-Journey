@@ -79,6 +79,7 @@ option {
 ::-webkit-scrollbar-thumb:hover { 
     background: #6366f1; 
 }
+
 /* Base Preloader Styles */
 #preloader {
   position: fixed;
@@ -100,12 +101,54 @@ option {
   gap: 1rem;
 }
 
+/* Updated Loader Count with Smooth Pseudo-element Anchor */
 #loaderCount {
+  position: relative;
   font-size: 5rem;
   font-weight: 800;
   letter-spacing: -0.05em;
   line-height: 1;
   padding: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* The Perfect Circular Ripple Element */
+#loaderCount::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.5em; 
+  height: 1.5em;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Animation Trigger on Pseudo-element */
+.ripple-effect::after {
+  animation: waterRipple 0.8s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+}
+
+/* Water Ripple Animation */
+@keyframes waterRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
 }
 
 #loaderName {
@@ -120,25 +163,10 @@ option {
 
 /* Preloader State Helpers */
 body.loading {
-  overflow: hidden; /*[cite: 12] */
+  overflow: hidden;
 }
 
 #preloader.preloader-hidden {
-  opacity: 0; /*[cite: 12] */
-  pointer-events: none; /*[cite: 12] */
-}
-
-/* Water Ripple Effect */
-@keyframes waterRipple {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); /*[cite: 12] */
-  }
-  100% {
-    box-shadow: 0 0 0 40px rgba(255, 255, 255, 0); /*[cite: 12] */
-  }
-}
-
-.ripple-effect {
-  border-radius: 50%; /*[cite: 12] */
-  animation: waterRipple 0.6s ease-out forwards; /*[cite: 12] */
+  opacity: 0;
+  pointer-events: none;
 }

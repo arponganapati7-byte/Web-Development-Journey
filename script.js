@@ -9,22 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const loaderCount = document.getElementById("loaderCount");
     const loaderName = document.getElementById("loaderName");
 
+    // Helper function to trigger/reset the smooth circular ripple
+    function triggerRipple() {
+        if (!loaderCount) return;
+        loaderCount.classList.remove('ripple-effect');
+        void loaderCount.offsetWidth; // Force reflow to reset CSS animation
+        loaderCount.classList.add('ripple-effect');
+    }
+
     // ============================================================
-    // PRELOADER & COUNTER LOGIC
+    // SMOOTH EASE-OUT PRELOADER (CUBIC EASE OUT)
     // ============================================================
     if (preloader && loaderCount) {
-        let count = 0;
         loaderCount.textContent = "0";
+        let rippleTriggered = false;
 
-        // Initial Ripple Effect
-        setTimeout(() => {
-            loaderCount.classList.add("ripple-effect");
-            setTimeout(() => {
-                loaderCount.classList.remove("ripple-effect");
-            }, 700);
-        }, 150);
-
-        // Fade in Name Subtitle
+        // Subtitle (Name) Fade-in Sync
         if (loaderName) {
             setTimeout(() => {
                 loaderName.style.transition = "opacity 0.8s ease, transform 0.8s ease";
@@ -33,37 +33,62 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 500);
         }
 
-        // Countdown Controller
-        function runCountdown() {
-            count++;
-            loaderCount.textContent = count;
+        // Initial Ripple Effect
+        setTimeout(() => {
+            triggerRipple();
+        }, 150);
 
-            if (count < 98) {
-                setTimeout(runCountdown, 25); // Fast (0 to 97)
-            } else if (count === 98) {
-                loaderCount.classList.add("ripple-effect");
-                setTimeout(() => {
-                    loaderCount.classList.remove("ripple-effect");
-                }, 600);
-                setTimeout(runCountdown, 500); // Slow pause at 98
-            } else if (count === 99) {
-                setTimeout(runCountdown, 900); // Dramatic pause at 99
-            } else if (count === 100) {
-                setTimeout(() => {
-                    preloader.classList.add("preloader-hidden");
-                    document.body.classList.remove("loading");
-                    
-                    setTimeout(() => {
-                        preloader.style.display = "none";
-                    }, 700);
+        // Easing Function: Starts fast, decelerates naturally
+        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
-                    // Trigger GSAP entrance animations after preloader exits
-                    initHeroAnimations();
-                }, 900);
+        function startSmoothCountdown(duration) {
+            let startTime = null;
+
+            function animate(currentTime) {
+                if (!startTime) startTime = currentTime;
+                
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easedProgress = easeOutCubic(progress);
+                const currentCount = Math.floor(easedProgress * 100);
+
+                loaderCount.textContent = currentCount;
+
+                // Organic ripple trigger around 90-95%
+                if (currentCount >= 90 && !rippleTriggered) {
+                    rippleTriggered = true;
+                    triggerRipple();
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    finalizePreloader();
+                }
             }
+
+            requestAnimationFrame(animate);
         }
 
-        setTimeout(runCountdown, 800);
+        function finalizePreloader() {
+            setTimeout(() => {
+                preloader.classList.add("preloader-hidden");
+                document.body.classList.remove("loading");
+                
+                setTimeout(() => {
+                    preloader.style.display = "none";
+                }, 700);
+
+                // Start website GSAP animations after preloader leaves
+                initHeroAnimations();
+            }, 600);
+        }
+
+        // 3500ms duration for ultra-smooth countdown
+        setTimeout(() => {
+            startSmoothCountdown(3500); 
+        }, 800);
+
     } else {
         document.body.classList.remove("loading");
         initHeroAnimations();
