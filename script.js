@@ -137,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     calculateGate();
     createBoard();
     initSortingVisualizer();
+    initWeb3Forms();
 });
 
 /* ================= LOGIC GATE SIMULATOR ================= */
@@ -570,4 +571,66 @@ function initSortingVisualizer() {
     });
 
     generateNewArray();
+}
+
+/* ================= WEB3FORMS SUBMISSION ================= */
+function initWeb3Forms() {
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('formSubmitBtn');
+    const formResponse = document.getElementById('formResponse');
+
+    if (!form || !submitBtn) return;
+
+    const btnTextSpan = submitBtn.querySelector('span');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const originalText = btnTextSpan ? btnTextSpan.textContent : "Send Message";
+
+        if (formResponse) {
+            formResponse.classList.add('hidden');
+            formResponse.className = "text-center text-sm font-mono mt-4 p-3 rounded-xl hidden";
+        }
+
+        if (btnTextSpan) btnTextSpan.textContent = "Sending...";
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                if (formResponse) {
+                    formResponse.textContent = "Success! Your message has been sent directly to Gmail.";
+                    formResponse.classList.remove('hidden');
+                    formResponse.classList.add('bg-emerald-500/10', 'border', 'border-emerald-500/30', 'text-emerald-400');
+                }
+                form.reset();
+            } else {
+                if (formResponse) {
+                    formResponse.textContent = "Error: " + (data.message || "Failed to send message.");
+                    formResponse.classList.remove('hidden');
+                    formResponse.classList.add('bg-rose-500/10', 'border', 'border-rose-500/30', 'text-rose-400');
+                }
+            }
+
+        } catch (error) {
+            if (formResponse) {
+                formResponse.textContent = "Something went wrong. Please check your connection.";
+                formResponse.classList.remove('hidden');
+                formResponse.classList.add('bg-rose-500/10', 'border', 'border-rose-500/30', 'text-rose-400');
+            }
+        } finally {
+            if (btnTextSpan) btnTextSpan.textContent = originalText;
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+        }
+    });
 }
