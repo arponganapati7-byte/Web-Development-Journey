@@ -633,4 +633,24 @@ function initWeb3Forms() {
             submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
         }
     });
+    // Dynamic Dhaka Local Time Clock
+function updateDhakaTime() {
+    const clockElement = document.getElementById('dhakaClock');
+    if (!clockElement) return;
+
+    const options = {
+        timeZone: 'Asia/Dhaka',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    };
+
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    clockElement.textContent = formatter.format(new Date());
+}
+
+// Run clock every second
+setInterval(updateDhakaTime, 1000);
+updateDhakaTime(); // Initial call
 }

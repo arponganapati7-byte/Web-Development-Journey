@@ -316,6 +316,22 @@
         <section id="location" class="glass-panel rounded-[2.5rem] p-10 mb-40 flex flex-col md:flex-row items-center gap-10 project-card-reveal">
             <div class="flex-1">
                 <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                    <!-- Live Time & Status Pill -->
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-900/90 border border-brand-secondary/30 mb-6 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                        <!-- Pulsing Cyan Dot -->
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-secondary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-secondary"></span>
+                        </span>
+                        
+                        <!-- Time & Status Text -->
+                        <div class="text-xs font-mono flex items-center gap-2">
+                            <span class="text-slate-400">Dhaka, BD:</span>
+                            <span id="dhakaClock" class="font-bold text-white">11:01:48 AM</span>
+                            <span class="text-slate-600">|</span>
+                            <span class="text-brand-secondary font-semibold">Available for Projects</span>
+                        </div>
+                    </div>
                     <i data-lucide="map-pin" class="text-red-500"></i> Location & Roots
                 </h2>
                 <div class="space-y-4">
