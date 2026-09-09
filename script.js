@@ -633,11 +633,22 @@ function initWeb3Forms() {
             submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
         }
     });
-    // Dynamic Dhaka Local Time Clock
+// Dynamic Dhaka Local Time Clock & Synchronized Availability Status
 function updateDhakaTime() {
+    // Location Pill Elements
     const clockElement = document.getElementById('dhakaClock');
-    if (!clockElement) return;
+    const statusElement = document.getElementById('availabilityStatus');
+    const statusDot = document.getElementById('statusDot');
+    const statusPulse = document.getElementById('statusPulse');
 
+    // Hero Section Elements
+    const heroBadgeStatus = document.getElementById('heroBadgeStatus');
+    const heroStatusDot = document.getElementById('heroStatusDot');
+    const heroStatusPulse = document.getElementById('heroStatusPulse');
+
+    const now = new Date();
+
+    // 1. Format Time for Dhaka Timezone
     const options = {
         timeZone: 'Asia/Dhaka',
         hour: '2-digit',
@@ -645,9 +656,53 @@ function updateDhakaTime() {
         second: '2-digit',
         hour12: true
     };
-
     const formatter = new Intl.DateTimeFormat('en-US', options);
-    clockElement.textContent = formatter.format(new Date());
+    if (clockElement) {
+        clockElement.textContent = formatter.format(now);
+    }
+
+    // 2. Check Dhaka Local Hour (0 to 23)
+    const dhakaHour = parseInt(
+        new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Asia/Dhaka',
+            hour: 'numeric',
+            hour12: false
+        }).format(now), 10
+    );
+
+    // Available between 7:00 AM (7) and 12:00 AM (24/0)
+    const isAvailable = dhakaHour >= 7 && dhakaHour < 24;
+
+    if (isAvailable) {
+        // --- ONLINE STATE ---
+        // Location Pill
+        if (statusElement) {
+            statusElement.textContent = "Available for Projects";
+            statusElement.className = "text-brand-secondary font-semibold text-[11px]";
+        }
+        if (statusDot) statusDot.className = "relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-secondary";
+        if (statusPulse) statusPulse.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-secondary opacity-75";
+
+        // Hero Badge & Dot
+        if (heroBadgeStatus) heroBadgeStatus.textContent = "Available for Projects";
+        if (heroStatusDot) heroStatusDot.className = "relative bg-emerald-500 w-5 h-5 md:w-6 md:h-6 rounded-full border-4 border-[#0b0f19]";
+        if (heroStatusPulse) heroStatusPulse.className = "animate-ping absolute inline-flex h-5 w-5 md:h-6 md:w-6 rounded-full bg-emerald-400 opacity-75";
+
+    } else {
+        // --- OFFLINE STATE ---
+        // Location Pill
+        if (statusElement) {
+            statusElement.textContent = "Offline (Back at 7:00 AM)";
+            statusElement.className = "text-slate-500 font-semibold text-[11px]";
+        }
+        if (statusDot) statusDot.className = "relative inline-flex rounded-full h-2.5 w-2.5 bg-slate-500";
+        if (statusPulse) statusPulse.className = "hidden";
+
+        // Hero Badge & Dot
+        if (heroBadgeStatus) heroBadgeStatus.textContent = "Offline (Back at 7:00 AM)";
+        if (heroStatusDot) heroStatusDot.className = "relative bg-slate-500 w-5 h-5 md:w-6 md:h-6 rounded-full border-4 border-[#0b0f19]";
+        if (heroStatusPulse) heroStatusPulse.className = "hidden";
+    }
 }
 
 // Run clock every second

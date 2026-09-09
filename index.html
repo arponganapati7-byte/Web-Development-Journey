@@ -73,15 +73,22 @@
     <main class="max-w-6xl mx-auto px-6 pt-32">
         
         <section id="home" class="text-center mb-32">
+            <!-- Profile Image with Dynamic Ping Status Dot -->
             <div class="relative mb-8 flex justify-center items-center" id="hero-img">
                 <div class="relative w-36 h-36 md:w-44 md:h-44 rounded-full border-4 border-sky-400 shadow-[0_0_20px_rgba(56,189,248,0.6)] overflow-hidden">
                     <img src="profile.jpg" alt="Arpon" class="w-full h-full object-cover object-center aspect-square">
                 </div>
-                <div class="absolute bottom-1 right-[calc(50%-4.5rem)] md:right-[calc(50%-5.5rem)] translate-x-8 bg-emerald-500 w-5 h-5 md:w-6 md:h-6 rounded-full border-4 border-[#0b0f19]"></div>
+                
+                <!-- Animated Active Indicator -->
+                <div class="absolute bottom-1 right-[calc(50%-4.5rem)] md:right-[calc(50%-5.5rem)] translate-x-8 flex items-center justify-center">
+                    <span id="heroStatusPulse" class="animate-ping absolute inline-flex h-5 w-5 md:h-6 md:w-6 rounded-full bg-emerald-400 opacity-75"></span>
+                    <span id="heroStatusDot" class="relative bg-emerald-500 w-5 h-5 md:w-6 md:h-6 rounded-full border-4 border-[#0b0f19]"></span>
+                </div>
             </div>
 
+            <!-- Dynamic Status Badge -->
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 mb-6">
-                <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-brand-secondary">Available for Projects</span>
+                <span id="heroBadgeStatus" class="text-[10px] font-mono uppercase tracking-[0.2em] text-brand-secondary">Available for Projects</span>
             </div>
 
             <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6" id="hero-title">
@@ -313,27 +320,33 @@
 
         </section>
 
-        <section id="location" class="glass-panel rounded-[2.5rem] p-10 mb-40 flex flex-col md:flex-row items-center gap-10 project-card-reveal">
-            <div class="flex-1">
-                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
-                    <!-- Live Time & Status Pill -->
-                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-900/90 border border-brand-secondary/30 mb-6 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-                        <!-- Pulsing Cyan Dot -->
-                        <span class="relative flex h-2.5 w-2.5">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-secondary opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-secondary"></span>
-                        </span>
-                        
-                        <!-- Time & Status Text -->
-                        <div class="text-xs font-mono flex items-center gap-2">
+        <section id="location" class="glass-panel rounded-[2.5rem] p-8 md:p-10 mb-40 flex flex-col md:flex-row items-center gap-10 project-card-reveal">
+            <div class="flex-1 w-full">
+                
+                <!-- Live Time & Dynamic Status Pill -->
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-slate-900/90 border border-brand-secondary/30 mb-6 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                    <!-- Dynamic Status Indicator Dot -->
+                    <span class="relative flex h-2.5 w-2.5 shrink-0">
+                        <span id="statusPulse" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-secondary opacity-75"></span>
+                        <span id="statusDot" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-secondary"></span>
+                    </span>
+                    
+                    <!-- Time & Stacked Status Text -->
+                    <div class="text-xs font-mono flex flex-col items-start gap-0.5">
+                        <div class="flex items-center gap-1.5">
                             <span class="text-slate-400">Dhaka, BD:</span>
-                            <span id="dhakaClock" class="font-bold text-white">11:01:48 AM</span>
-                            <span class="text-slate-600">|</span>
-                            <span class="text-brand-secondary font-semibold">Available for Projects</span>
+                            <span id="dhakaClock" class="font-bold text-white">07:15:01 PM</span>
                         </div>
+                        <span id="availabilityStatus" class="text-brand-secondary font-semibold text-[11px]">Available for Projects</span>
                     </div>
+                </div>
+
+                <!-- Section Heading -->
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
                     <i data-lucide="map-pin" class="text-red-500"></i> Location & Roots
                 </h2>
+
+                <!-- Location Details Cards -->
                 <div class="space-y-4">
                     <div class="flex items-start gap-4 p-4 rounded-2xl glass-card">
                         <div class="text-2xl">🏠</div>
@@ -351,6 +364,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Map / Visual Container -->
             <div class="w-full md:w-1/2 h-64 glass-card rounded-[2rem] overflow-hidden relative group">
                 <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1583267746897-2cf41588817d?auto=format&fit=crop&q=80')] bg-cover bg-center grayscale opacity-30 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-black flex items-end p-8">
@@ -497,7 +512,7 @@
     </main>
 
     <footer class="py-10 border-t border-white/5 text-center text-slate-600 text-xs font-mono uppercase tracking-[0.3em]">
-        © 2026 Arpon | Personal Brand • Build v4.2.0
+        © 2026 Arpon | Personal Brand • Build v4.2.1
     </footer>
 
     <!-- External JavaScript File -->
